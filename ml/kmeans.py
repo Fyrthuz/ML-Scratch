@@ -17,7 +17,9 @@ class KMeans():
         try:
             if self.dist_metric == 'euclidean':
                 # (N, D), (C, D) --> (N, C)  === (N,1,D) - (1, C, D) --> (N,C)
+                # squared_diff (N, C, D)
                 squared_diff = (points[:, np.newaxis, :] - self.centroids[np.newaxis, :, :])**2
+                # dists (N, C)
                 dists = np.sqrt(np.sum(squared_diff, axis=-1))
                 return dists
             else:
